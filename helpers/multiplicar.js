@@ -1,26 +1,30 @@
 const fs = require('fs')
+const { argv } = require('process')
 
-const crearArchivo = async (base) => {
+const crearArchivo = async (base = 5, listar = false, hasta = 10) => {
   try {
-    console.log('=================')
-    console.log('   Tabla del ', base)
-    console.log('=================')
-
     let tabla = ''
+    let tablArchivo = ''
 
     console.log(' _____________')
-    for (let i = 1; i < 11; i++) {
-      tabla += `| ${base.toString().yellow} x ${i} = ${
+    for (let i = 1; i <= hasta; i++) {
+      tabla += `${'|'.red} ${base.toString().yellow} x ${i.toString().cyan} = ${
         (base * i).toString().rainbow
       }\n`
+      tablArchivo += `| ${base} x ${i} = ${base * i} \n`
     }
 
-    console.log(tabla)
-    console.log('---------------')
+    if (listar == true) {
+      console.log('================='.red)
+      console.log('   Tabla del '.cyan, base.toString().cyan)
+      console.log('================='.red)
+      console.log(tabla)
+      console.log('---------------'.red)
+    }
 
     const nombreArchivo = `tabla-${base}.txt`
 
-    fs.writeFile(`tabla-${base}.txt`, tabla, (err) => {
+    fs.writeFile(`tabla-${base}.txt`, tablArchivo, (err) => {
       if (err) throw err
     })
 

@@ -1,10 +1,9 @@
 const { crearArchivo } = require('./helpers/multiplicar')
-require('colors')
+const argv = require('./helpers/yargs')
 
+require('colors')
 console.clear()
 
-const base = 5
-
-crearArchivo(base)
+crearArchivo(argv.b, argv.l, argv.h)
   .then((nombreArchivo) => console.log(`Se ha creado el ${nombreArchivo}`))
   .catch(console.error)
